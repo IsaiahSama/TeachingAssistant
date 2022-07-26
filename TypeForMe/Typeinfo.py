@@ -25,7 +25,7 @@ class Typer:
     Attrs:
         script_text (list): The lines of the script
         commands (list): A list of commands that can be used to control the Typer
-    
+        wait_time (float): The time to wait inbetween typing each character.
     Methods:
         get_file -> str: used to get the file containing the script to be typed
         load_script -> None: used to load the script to be typed from the file
@@ -37,6 +37,8 @@ class Typer:
 
     def __init__(self) -> None:
         self.script_text = None
+        self.commands = ["wait", "typespeed"]
+        self.wait_time = 0.2
 
     def get_file(self) -> str:
         """Method used to get the file containing the script the be typed
@@ -45,16 +47,14 @@ class Typer:
             str - The filename"""
         root = Tk()
 
-        filename = filedialog.askopenfilename(("Text", "*.txt"),)
+        filename = filedialog.askopenfilename(initialdir="./ToType", title="Select Your File", filetypes=(("Text", "*.txt"),))
         root.destroy()
 
         return filename
 
     def load_script(self):
         filename = self.get_file()
-        if not filename:
-            Print("No file was loaded")
-            raise TypeInfoException("No filename was provided!")
+        if not filename: raise TypeInfoException("No filename was provided!")
 
         with open(filename) as fp:
             self.script_text = fp.readlines()
@@ -68,11 +68,13 @@ class Typer:
         Args:
             msg (str): The message to check."""
         
-        text = msg.split(" ")
-        for cmd in self.commands:
-            if text[0] == cmd:
-                self.cmd = cmd
-                return True
+        if msg.startswith("Command:"):
+            text = msg.split(" ")
+            command = text[0].split(":")[-1]
+            for cmd in self.commands:
+                if command == cmd:
+                    self.cmd = cmd
+                    return True
         return None
 
     def exe_command(self, msg:str) -> bool:
@@ -88,18 +90,52 @@ class Typer:
         if self.cmd == "wait":
             text = msg.split("wait")[1:]
             val = text[-1].strip()
-            if not val.isnumeric():
+            try:
+                val = float(val)
+            except ValueError:
                 Print(val, "is not a number, so no waiting will be done.")
                 return False
+                
             secs = float(val)
             Print("Waiting", secs, "seconds")
             sleep(secs)
 
+        if self.cmd == "typespeed":
+            text = msg.split(" ")[1:]
+            new_speed = text[-1].strip()
+            try:
+                new_speed = float(new_speed)
+            except ValueError:
+                Print(new_speed, "is not a number, so speed remains unchanged")
+                return False
+
+            new_speed = float(new_speed)
+            Print("Set typing speed to have a delay of", new_speed)
+            self.wait_time = new_speed
+
     def type_it(self):
         """Method responsible for actually typing to the current window."""
-        
+        self.load_script()
+
         Print("Starting in 5 seconds")
         sleep(5)
 
+        for line in self.script_text:
+            try:
+                if self.is_command(line):
+                    self.exe_command(line)
+                else:
+                    for character in line:
+                        keyboard.write(character)
+                        sleep(self.wait_time)
+                        
+                    keyboard.press_and_release("enter")
+                    sleep(2)
+            except KeyboardInterrupt:
+                Print("Stopping!")
+                break
+
+
 if __name__ == "__main__":
     main = Typer()
+    main.type_it()
