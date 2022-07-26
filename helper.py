@@ -1,5 +1,5 @@
 """File which will contain helper functions"""
-from pyinputplus import inputMenu
+from pyinputplus import inputMenu, inputYesNo
 
 
 from ScriptReading import Engine
@@ -33,6 +33,11 @@ def prompt_for_choice(prompt, options:dict):
 
     print("Select the number of the choice you want to do.")
     return inputMenu(list(options.keys), prompt, numbered=True)
+
+def prompt_for_yes_no():
+    """Prompts the user for a yes or no response."""
+
+    return inputYesNo()
 
 def enter_to_continue(prompt="Press Enter to continue"):
     """Function that prompts the user to press enter to continue.
