@@ -39,7 +39,7 @@ class Engine:
         Args:
             message (str): The message to be displayed and read."""
 
-        print(message)
+        print("ENGINE.PY:", message)
         self.speak(message)
 
     def speak(self, message:str):
