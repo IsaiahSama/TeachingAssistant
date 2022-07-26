@@ -1,7 +1,7 @@
 import time
 import os
 from tkinter import filedialog, Tk
-import engine
+import Engine
 
 
 # FILE_PATH = "./Script.txt"
@@ -29,7 +29,7 @@ class Main:
 
     def __init__(self) -> None:
         self.script = None
-        self.engine = engine.Engine()
+        self.engine = Engine.Engine()
         self.commands = ["wait"]
         self.cmd = None
         self.file_path = ""
