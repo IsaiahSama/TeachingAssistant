@@ -1,15 +1,16 @@
 """File which will contain helper functions"""
 
+from typing import Callable
 from pyinputplus import inputMenu, inputYesNo
 from threading import Thread
 from ScriptReading import Engine
 
 engine = Engine.Engine()
 
-def Print(message:str):
+def Print(*message):
     """Modifies the output for print statements"""
     
-    print("HELPER.PY:", message)
+    print("HELPER.PY:", *message)
 
 def say_and_print_message(message:str):
     """Used to say and display a message to the screen
@@ -37,14 +38,14 @@ def prompt_for_choice(prompt, options:dict):
         str - The chosen key"""
 
     Print("Select the number of the choice you want to do.")
-    return inputMenu(list(options.keys), prompt, numbered=True)
+    return inputMenu(list(options.keys()), prompt, numbered=True)
 
 def prompt_for_yes_no():
     """Prompts the user for a yes or no response."""
 
     return inputYesNo()
 
-def enter_to_continue(prompt="Press Enter to continue"):
+def enter_to_continue(prompt="Press Enter to continue\n"):
     """Function that prompts the user to press enter to continue.
     
     Args:
@@ -52,7 +53,7 @@ def enter_to_continue(prompt="Press Enter to continue"):
 
     input(prompt)
 
-def create_thread(func:function, daemon=True, args=tuple()):
+def create_thread(func:Callable, daemon=True, args=tuple()):
     """Creates a threaded function and returns the thread object
     
     Args:
@@ -65,3 +66,9 @@ def create_thread(func:function, daemon=True, args=tuple()):
     thread = Thread(target=func, args=args, daemon=daemon)
     thread.start()
     return thread
+
+def ask_and_quit():
+    """Used to exit from the program after a prompt"""
+
+    input("Press enter to exit\n")
+    raise SystemExit

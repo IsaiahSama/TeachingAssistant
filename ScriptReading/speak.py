@@ -1,7 +1,7 @@
 import time
 import os
 from tkinter import filedialog, Tk
-import Engine
+from . import Engine
 
 
 # FILE_PATH = "./Script.txt"
@@ -11,10 +11,10 @@ def ask_and_quit():
     input("Press enter to exit")
     raise SystemExit
 
-def Print(message:str):
+def Print(*message:str):
     """Used to Print a message to the console. This will differentiate where each message comes from."""
 
-    print("SPEAK.PY:", message)
+    print("SPEAK.PY:", *message)
 
 
 class Main:

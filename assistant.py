@@ -21,33 +21,32 @@ class Main:
     def menu(self):
         """Displays the menu for the user to select their choice"""
 
-        prompt = "Here is what I have to offer. Select from the options below."
+        prompt = "\nHere is what I have to offer. Select from the options below.\n"
         menu_options[helper.prompt_for_choice(prompt, menu_options)]()
 
     def setup_read_script(self):
         """Performs setup for a script to be read"""
 
         if self.reader:
-            print("A script is currently being read. Would you like to force stop it?")
+            print("A script is currently being read. Would you like to force stop it? Yes or No?\n:")
             if helper.prompt_for_yes_no() == "yes":
                 self.reader.running = False
                 self.reader = None
             return True
 
         self.reader = Speak.Main()
-        helper.create_thread(self.read_script)
+        helper.create_thread(self.reader.run)
 
-    def read_script(self):
-        """Reads a script using the Speak.py file"""
+    def type_code(self):
         pass
-                    
 
 if __name__ == "__main__":
     main = Main()
 
     menu_options = {
         "Read Script": main.setup_read_script,
-        "Type code": main.type_code
+        "Type code": main.type_code,
+        "Quit": helper.ask_and_quit
     }
 
     main.run()
