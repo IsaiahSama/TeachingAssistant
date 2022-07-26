@@ -1,15 +1,20 @@
+from xml.dom.minidom import TypeInfo
 import helper
-from ScriptReading import Speak
+from ScriptReading import Reader
+from TypeForMe import Typer
 from time import sleep
 
 class Main:
     """Class responsible for managing the main functionality of the program.
     
     Attrs:
-        reading (bool): Whether a script is currently being read or not
+        reader (Reader): An instance of the Reader class being used for reading.
+        typer (Typer): An instance of the Typer class being used for typing
+
     """
     def __init__(self) -> None:
         self.reader = None
+        self.typer = None
 
     def run(self):
         """The main control loop for the Assistant"""
@@ -34,11 +39,15 @@ class Main:
                 self.reader = None
             return True
 
-        self.reader = Speak.Main()
+        self.reader = Reader.Reader()
         helper.create_thread(self.reader.run)
 
     def type_code(self):
-        pass
+        self.typer = Typer.Typer()
+        try:
+            self.typer.type_it()
+        except Typer.TypeInfoException as err:
+            print(err)
 
 if __name__ == "__main__":
     main = Main()
