@@ -41,13 +41,13 @@ class Typer:
         filename = self.get_file()
         if not filename:
             Print("No file was loaded")
-            raise TypeInfoException("No filename was provided")
+            raise TypeInfoException("No filename was provided!")
 
         with open(filename) as fp:
             self.script_text = fp.readlines()
 
         if not self.script_text:
-            raise TypeInfoException("Script file was empty")
+            raise TypeInfoException("Script file was empty!")
 
 if __name__ == "__main__":
     main = Typer()
