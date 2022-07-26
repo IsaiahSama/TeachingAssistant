@@ -17,7 +17,7 @@ def Print(*message:str):
     print("SPEAK.PY:", *message)
 
 
-class Main:
+class Reader:
     """The main class of the program
     
     Attrs:
@@ -110,6 +110,6 @@ class Main:
 
 
 if __name__ == "__main__":
-    main = Main()
+    main = Reader()
     main.run()
 
