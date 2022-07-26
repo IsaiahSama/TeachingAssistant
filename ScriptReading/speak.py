@@ -11,6 +11,11 @@ def ask_and_quit():
     input("Press enter to exit")
     raise SystemExit
 
+def Print(message:str):
+    """Used to Print a message to the console. This will differentiate where each message comes from."""
+
+    print("SPEAK.PY:", message)
+
 
 class Main:
     """The main class of the program
@@ -20,6 +25,7 @@ class Main:
         script (list): The script broken into lines
         commands (list): List of commands
         cmd (str): The current command to be run.
+        running (bool): Whether the script should be allowed to run or not.
 
     Methods:
         setup(): Used to set up everything the program needs
@@ -33,12 +39,14 @@ class Main:
         self.commands = ["wait"]
         self.cmd = None
         self.file_path = ""
+        self.running = True
 
     def run(self):
         """Used to run the program."""
         self.setup()
 
         for line in self.script:
+            if not self.running: raise SystemExit
             try:
                 if self.is_command(line):
                     self.exe_command(line)
@@ -55,7 +63,7 @@ class Main:
         root.destroy()
 
         if not self.file_path:
-            print("No file was selected")
+            Print("No file was selected")
             ask_and_quit()
 
         with open(self.file_path) as fp:
@@ -64,7 +72,7 @@ class Main:
         self.script = [line for line in script if not line.startswith("#")]
 
         if not self.script:
-            print("Script file is empty.")
+            Print("Script file is empty.")
             ask_and_quit()
 
     def is_command(self, msg:str) -> bool:
@@ -94,10 +102,10 @@ class Main:
             text = msg.split("wait")[1:]
             val = text[-1].strip()
             if not val.isnumeric():
-                print(val, "is not a number, so no waiting will be done.")
+                Print(val, "is not a number, so no waiting will be done.")
                 return False
             secs = float(val)
-            print("Waiting", secs, "seconds")
+            Print("Waiting", secs, "seconds")
             time.sleep(secs)
 
 
