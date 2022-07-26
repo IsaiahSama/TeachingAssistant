@@ -1,4 +1,3 @@
-from xml.dom.minidom import TypeInfo
 import helper
 from ScriptReading import Reader
 from TypeForMe import Typer

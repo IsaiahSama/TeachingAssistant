@@ -2,5 +2,5 @@ Insert some text here
 Command:wait 2
 and let us go crazy
 Yes sir!!!!
-Command:typespeed 0.0
+Command:typespeed 0.1
 And we should type this line really fast

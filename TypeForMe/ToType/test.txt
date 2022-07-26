@@ -1,3 +1,5 @@
+Command:typespeed 0
+
 According to all known laws
 of aviation,
 
