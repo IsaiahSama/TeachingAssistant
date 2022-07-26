@@ -17,6 +17,14 @@ def Print(*message:str):
     print("SPEAK.PY:", *message)
 
 
+class ReaderException(Exception):
+    """Exception raised by the Reader.py module"""
+
+    def __init__(self, *text):
+        message = "ReaderException: " + ' '.join(text)
+        super().__init__(message)
+
+
 class Reader:
     """The main class of the program
     
@@ -63,8 +71,7 @@ class Reader:
         root.destroy()
 
         if not self.file_path:
-            Print("No file was selected")
-            ask_and_quit()
+            raise ReaderException("No file was selected")
 
         with open(self.file_path) as fp:
             script = fp.readlines()
@@ -72,8 +79,7 @@ class Reader:
         self.script = [line for line in script if not line.startswith("#")]
 
         if not self.script:
-            Print("Script file is empty.")
-            ask_and_quit()
+            raise ReaderException("Script file is empty.")
 
     def is_command(self, msg:str) -> bool:
         """Used to detect whether a given line of text is a command or not
