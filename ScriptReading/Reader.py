@@ -61,7 +61,9 @@ class Reader:
                 else:
                     self.engine.say_and_print(line)
             except KeyboardInterrupt:
+                self.running = False
                 raise SystemExit
+        self.running = False
 
     def setup(self):
         """Used to setup everything the program needs."""
