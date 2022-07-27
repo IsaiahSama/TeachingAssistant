@@ -115,6 +115,7 @@ class Typer:
 
         if self.cmd == "input":
             input("Press enter to continue")
+            sleep(5)
 
     def type_it(self):
         """Method responsible for actually typing to the current window."""
