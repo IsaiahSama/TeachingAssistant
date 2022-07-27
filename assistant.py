@@ -47,7 +47,7 @@ class Main:
 
     def type_code(self):
         self.typer = Typer.Typer()
-        helper.create_thread(self.typer.type_it)
+        helper.create_thread(self.typer.run)
         keyboard.add_hotkey("ctrl+`", helper.toggle_typer_pause, [self.typer])
         keyboard.add_hotkey("alt+`", helper.typer_shut_down,  [self.typer])
 
