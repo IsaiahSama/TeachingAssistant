@@ -28,7 +28,7 @@ class Aid:
     def __init__(self, class_name:str="AID") -> None:
         self.class_name = class_name
         self.engine = Engine.Engine()
-        self.commands = ["wait", "input"]
+        self.commands = ["wait", "input", "rate", "voice"]
         self.current_cmd = None
         self.running = True
         self.paused = False 
@@ -92,13 +92,16 @@ class Aid:
         if self.current_cmd == "rate":
             new_rate = text[-1].strip()
             if helper.is_num(new_rate):
-                self.engine.rate = new_rate
+                self.engine.rate = int(new_rate)
                 self.Print("The new engine rate is", self.engine.rate)
+            else:
+                self.Print(new_rate, "is not a number")
         
         if self.current_cmd == "voice":
             new_voice = text[-1].strip()
             if helper.is_num(new_voice):
-                if new_voice in [0, 1]:
+                if int(new_voice) in [0, 1]:
                     self.engine.voice = int(new_voice)
+                    self.Print("The new voice is", self.engine.voice)
                 else:
-                    self.Print("Values for new voices are 0 and 1")
+                    self.Print("Values for new voices are 0 and 1, not", new_voice)
