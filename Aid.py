@@ -25,7 +25,7 @@ class Aid:
         Print(*args) -> None: Outputs a message with modified formatting
     """
 
-    def __init__(self, class_name:str) -> None:
+    def __init__(self, class_name:str="AID") -> None:
         self.class_name = class_name
         self.engine = Engine.Engine()
         self.commands = ["wait", "input"]
@@ -34,13 +34,13 @@ class Aid:
         self.paused = False 
         self.script = helper.load_script()
 
-    def Print(*message):
+    def Print(self, *message):
         """Modifies output from print statement
         
         Args:
             *message - The message to be output"""
 
-        print("AID:", *message)
+        print(self.class_name, *message)
 
     def setup(self) -> None:
         """Base function to be overriden to provide custom setup features"""
@@ -75,7 +75,7 @@ class Aid:
             command (str): The command to be parsed
             
         Returns:
-            Bool"""
+            Bool: True if the given command was handled by this function"""
         text = command.split(" ")[1:]
         
         if self.cmd == "wait":

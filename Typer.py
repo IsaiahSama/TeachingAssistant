@@ -1,7 +1,7 @@
 """Script used to take control of the keyboard and type output to the screen"""
 import keyboard
 
-import aid
+import Aid
 import helper
 
 from time import sleep
@@ -23,7 +23,7 @@ class TypeInfoException(Exception):
         super().__init__(message)
 
 
-class Typer(aid.Aid):
+class Typer(Aid.Aid):
     """Class used to manage all automated typing. Inherits from Aid.Aid
     
     Attrs:
