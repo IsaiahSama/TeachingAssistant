@@ -10,6 +10,8 @@ class Engine:
     
     Attrs:
         messages (list): List of messages to be read
+        rate (int): The speaking rate of the tts
+        voice (int): The type of voice for the tts. 0 for MALE_VOICE, 1 for FEMALE_VOICE
     Methods:
         setup_engine(): Used to setup the Text To Speech.
         say_and_print(*args): Prints a message to the screen, and says it as well.
@@ -18,7 +20,8 @@ class Engine:
     messages = []
 
     def __init__(self) -> None:
-        pass
+        self.rate = 120
+        self.voice = MALE_VOICE
 
     def setup_engine(self):
         """Sets up the pyttsx3 engine for usage.
@@ -27,8 +30,8 @@ class Engine:
         engine = pyttsx3.init()
         
         voices = engine.getProperty('voices')
-        engine.setProperty('rate', 200)
-        engine.setProperty('voice',voices[MALE_VOICE].id)
+        engine.setProperty('rate', self.rate)
+        engine.setProperty('voice',voices[self.voice].id)
         engine.setProperty('volume', 1.0)
 
         return engine        
