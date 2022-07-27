@@ -41,14 +41,12 @@ class Main:
 
         self.reader = Reader.Reader()
         helper.create_thread(self.reader.run)
-        keyboard.add_hotkey("ctrl+p", helper.toggle_pause, [self.reader])
+        keyboard.add_hotkey("ctrl+p", helper.toggle_reader_pause, [self.reader])
 
     def type_code(self):
         self.typer = Typer.Typer()
-        try:
-            self.typer.type_it()
-        except Typer.TypeInfoException as err:
-            print(err)
+        helper.create_thread(self.typer.type_it)
+        keyboard.add_hotkey("ctrl+`", helper.toggle_typer_pause, [self.typer])
 
 if __name__ == "__main__":
     main = Main()
