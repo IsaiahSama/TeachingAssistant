@@ -3,11 +3,11 @@
 from typing import Callable
 from pyinputplus import inputMenu, inputYesNo
 from threading import Thread
+from tkinter import Tk, filedialog
 
 import Typer
 import Reader
 import Engine
-import keyboard
 
 engine = Engine.Engine()
 
@@ -15,6 +15,29 @@ def Print(*message):
     """Modifies the output for print statements"""
     
     print("HELPER.PY:", *message)
+
+def get_file() -> str:
+        """Method used to get the file containing the script the be typed
+        
+        Returns:
+            str - The filename"""
+        root = Tk()
+
+        filename = filedialog.askopenfilename(initialdir="Files/", title="Select Your File", filetypes=(("Text", "*.txt"),))
+        root.destroy()
+
+        return filename
+
+def load_script():
+        filename = get_file()
+        if not filename: raise Exception("No filename was provided!")
+
+        with open(filename) as fp:
+            lines= fp.readlines()
+
+        if not lines:
+            raise Exception ("Script file was empty!")
+        return lines
 
 def say_and_print_message(message:str):
     """Used to say and display a message to the screen
