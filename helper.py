@@ -77,6 +77,15 @@ def ask_and_quit():
     input("Press enter to exit\n")
     raise SystemExit
 
+def repeat_line(reader:Reader.Reader):
+    """Used to tell the reader to repeat a line with a 5 second delay
+    
+    Args:
+        reader (Reader.Reader): The reader object to be acted upon"""
+
+    reader.repeat_line = True
+    Print("Repeating current line")
+
 
 def toggle_pause(obj: Reader.Reader | Typer.Typer):
     """Used to toggle the pause of an object."""

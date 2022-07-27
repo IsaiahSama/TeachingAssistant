@@ -35,6 +35,7 @@ class Reader:
         cmd (str): The current command to be run.
         running (bool): Whether the script should be allowed to run or not.
         paused (bool): Whether to pause the reading or not
+        repeat_line (bool): Whether to repeat the current line or not
 
     Methods:
         setup(): Used to set up everything the program needs
@@ -50,12 +51,17 @@ class Reader:
         self.file_path = ""
         self.running = True
         self.paused = False
+        self.repeat_line = False
 
     def run(self):
         """Used to run the program."""
         self.setup()
 
-        for line in self.script:
+        line_count = len(self.script)
+        current_line = 0
+
+        while current_line < line_count:
+            line = self.script[current_line]
             if not self.running: raise SystemExit
             while self.paused: time.sleep(0.2)
             try:
@@ -66,6 +72,13 @@ class Reader:
             except KeyboardInterrupt:
                 self.running = False
                 raise SystemExit
+            
+            if self.repeat_line:
+                time.sleep(5)
+                self.repeat_line = False
+                continue
+                
+            current_line += 1
         self.running = False
 
     def setup(self):

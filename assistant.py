@@ -43,6 +43,7 @@ class Main:
         helper.create_thread(self.reader.run)
         keyboard.add_hotkey("ctrl+p", helper.toggle_reader_pause, [self.reader])
         keyboard.add_hotkey("alt+p", helper.reader_shut_down, [self.reader])
+        keyboard.add_hotkey("ctrl+shift", helper.repeat_line, [self.reader])
 
     def type_code(self):
         self.typer = Typer.Typer()
