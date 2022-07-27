@@ -1,8 +1,9 @@
 import time
-import os
-from tkinter import filedialog, Tk
-import Engine
 
+import Engine
+import Aider
+
+from tkinter import filedialog, Tk
 
 # FILE_PATH = "./Script.txt"
 
@@ -25,38 +26,29 @@ class ReaderException(Exception):
         super().__init__(message)
 
 
-class Reader:
-    """The main class of the program
+class Reader(Aider.Aid):
+    """Class responsible for handling the Reading activites of the script. Inherits from Aider
     
     Attrs:
         engine (Engine): The TTS engine.
         script (list): The script broken into lines
         commands (list): List of commands
-        cmd (str): The current command to be run.
+        cmd (None | str): The current command to be run.
         running (bool): Whether the script should be allowed to run or not.
         paused (bool): Whether to pause the reading or not
         repeat_line (bool): Whether to repeat the current line or not
 
     Methods:
-        setup(): Used to set up everything the program needs
         run(): Used to run the main program
         is_command(msg:str): Used to check if a line of the script is a command.
         exe_command(msg:str): Used to execute a command."""
 
-    def __init__(self) -> None:
-        self.script = None
-        self.engine = Engine.Engine()
-        self.commands = ["wait", "input"]
-        self.cmd = None
-        self.file_path = ""
-        self.running = True
-        self.paused = False
+    def __init__(self):
+        super().__init__("Reader")
         self.repeat_line = False
 
     def run(self):
         """Used to run the program."""
-        self.setup()
-
         line_count = len(self.script)
         current_line = 0
 
@@ -81,83 +73,23 @@ class Reader:
             current_line += 1
         self.running = False
 
-    def setup(self):
-        """Used to setup everything the program needs."""
-        root = Tk()
-
-        self.file_path = filedialog.askopenfilename(initialdir="Files/", title="Select txt file for me to read.", filetypes=(("text", "*.txt"),))
-        root.destroy()
-
-        if not self.file_path:
-            raise ReaderException("No file was selected")
-
-        with open(self.file_path) as fp:
-            script = fp.readlines()
-
-        self.script = [line for line in script if not line.startswith("#")]
-
-        if not self.script:
-            raise ReaderException("Script file is empty.")
-
     def is_command(self, msg:str) -> bool:
-        """Used to detect whether a given line of text is a command or not
+        """Used to detect whether a given line of text is a command or not.
         
         Args:
-            msg (str): The message to check."""
-        
+            msg (str): The eline to check
+            
+        Returns:
+            bool"""
+
         text = msg.split(" ")
         for cmd in self.commands:
             if text[0] == cmd:
-                self.cmd = cmd
+                self.current_cmd = cmd
                 return True
         return None
-
-    def is_num(self, val:str):
-        """Used to check whether a given value is a floating point number.
-        
-        Args:
-            val (str): The value to check"""
-        try:
-            val = float(val)
-        except ValueError:
-            Print(val, "is not a number.")
-            return False
-        return True
-
-    def exe_command(self, msg:str) -> bool:
-        """Used to execute a given command.
-        
-        Args:
-            msg (str): The string containing the command.
-        
-        Returns:
-            Bool"""
-        
-        # Parsing time.
-        text = msg.split(" ")[1:]
-        if self.cmd == "wait":
-            val = text[-1].strip()
-            if self.is_num(val):
-                Print("Waiting", val, "seconds")
-                time.sleep(float(val))
-
-        if self.cmd == "input":
-            input("Press enter to continue")
-
-        if self.cmd == "rate":
-            new_rate = text[-1].strip()
-            if self.is_num(new_rate):
-                self.engine.rate = new_rate
-                Print("The new engine rate is", self.engine.rate)
-        
-        if self.cmd == "voice":
-            new_voice = text[-1].strip()
-            if self.is_num(new_voice):
-                if new_voice in [0, 1]:
-                    self.engine.voice = int(new_voice)
-                else:
-                    Print("Values for new voices are 0 and 1")
-
+    
+    # No custom commands so no need to overwrite.
 
 
 if __name__ == "__main__":
