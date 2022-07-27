@@ -140,21 +140,17 @@ class Typer:
             while self.paused: sleep(0.2)
             if not self.running: return
             line = line.strip("\n")
-            try:
-                if self.is_command(line):
-                    self.exe_command(line)
-                else:
-                    for character in line.strip():
-                        while self.paused: sleep(0.2)
-                        if not self.running: return
-                        keyboard.write(character)
-                        sleep(self.wait_time)
-                        
-                    keyboard.press_and_release("enter")
-                    sleep(2)
-            except KeyboardInterrupt:
-                Print("Stopping!")
-                break
+            if self.is_command(line):
+                self.exe_command(line)
+            else:
+                for character in line.strip():
+                    while self.paused: sleep(0.2)
+                    if not self.running: return
+                    keyboard.write(character)
+                    sleep(self.wait_time)
+                    
+                keyboard.press_and_release("enter")
+                sleep(2)
 
 
 if __name__ == "__main__":
