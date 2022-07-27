@@ -16,6 +16,18 @@ def Print(*message):
     
     print("HELPER.PY:", *message)
 
+def is_num(val:str):
+    """Used to check whether a given value is a floating point number.
+    
+    Args:
+        val (str): The value to check"""
+    try:
+        val = float(val)
+    except ValueError:
+        Print(val, "is not a number.")
+        return False
+    return True
+
 def get_file() -> str:
         """Method used to get the file containing the script the be typed
         
