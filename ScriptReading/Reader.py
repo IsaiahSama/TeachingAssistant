@@ -44,7 +44,7 @@ class Reader:
     def __init__(self) -> None:
         self.script = None
         self.engine = Engine.Engine()
-        self.commands = ["wait"]
+        self.commands = ["wait", "input"]
         self.cmd = None
         self.file_path = ""
         self.running = True
@@ -113,6 +113,8 @@ class Reader:
             secs = float(val)
             Print("Waiting", secs, "seconds")
             time.sleep(secs)
+        if self.cmd == "input":
+            input("Press enter to continue")
 
 
 if __name__ == "__main__":
