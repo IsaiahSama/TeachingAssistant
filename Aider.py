@@ -64,7 +64,7 @@ class Aid:
             command = text[0].split(":")[-1]
             for cmd in self.commands:
                 if command == cmd:
-                    self.cmd = cmd
+                    self.current_cmd = cmd
                     return True
         return None
 
@@ -78,24 +78,24 @@ class Aid:
             Bool: True if the given command was handled by this function"""
         text = command.split(" ")[1:]
         
-        if self.cmd == "wait":
+        if self.current_cmd == "wait":
             val = text[-1].strip()
             if helper.is_num(val):
                 self.Print("Waiting", val, "seconds")
                 sleep(float(val))
             return True
 
-        if self.cmd == "input":
+        if self.current_cmd == "input":
             input("Press enter to continue")
             sleep(5)
 
-        if self.cmd == "rate":
+        if self.current_cmd == "rate":
             new_rate = text[-1].strip()
             if helper.is_num(new_rate):
                 self.engine.rate = new_rate
                 self.Print("The new engine rate is", self.engine.rate)
         
-        if self.cmd == "voice":
+        if self.current_cmd == "voice":
             new_voice = text[-1].strip()
             if helper.is_num(new_voice):
                 if new_voice in [0, 1]:
