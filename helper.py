@@ -3,7 +3,10 @@
 from typing import Callable
 from pyinputplus import inputMenu, inputYesNo
 from threading import Thread
+
+import Reader
 import Engine
+import keyboard
 
 engine = Engine.Engine()
 
@@ -72,3 +75,12 @@ def ask_and_quit():
 
     input("Press enter to exit\n")
     raise SystemExit
+
+def toggle_pause(reader:Reader.Reader):
+    """Used to toggle the pause state of a Reader object
+    
+    Args:
+        reader (Reader.Reader): The reader to be acted upon"""
+    reader.pause = not reader.pause
+    Print("Reader has been", "paused" if reader.pause else "unpaused")
+    return None

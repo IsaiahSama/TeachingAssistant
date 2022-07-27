@@ -1,6 +1,7 @@
 import helper
 import Reader
 import Typer
+import keyboard
 from time import sleep
 
 class Main:
@@ -40,6 +41,7 @@ class Main:
 
         self.reader = Reader.Reader()
         helper.create_thread(self.reader.run)
+        keyboard.add_hotkey("ctrl+p", helper.toggle_pause, [self.reader])
 
     def type_code(self):
         self.typer = Typer.Typer()
