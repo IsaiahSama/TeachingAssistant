@@ -49,7 +49,7 @@ class Reader:
         self.cmd = None
         self.file_path = ""
         self.running = True
-        self.pause = False
+        self.paused = False
 
     def run(self):
         """Used to run the program."""
@@ -57,7 +57,7 @@ class Reader:
 
         for line in self.script:
             if not self.running: raise SystemExit
-            while self.pause: time.sleep(0.2)
+            while self.paused: time.sleep(0.2)
             try:
                 if self.is_command(line):
                     self.exe_command(line)
