@@ -5,8 +5,6 @@ from pyinputplus import inputMenu, inputYesNo
 from threading import Thread
 from tkinter import Tk, filedialog
 
-import Typer
-import Reader
 import Engine
 
 engine = Engine.Engine()
@@ -112,7 +110,7 @@ def ask_and_quit():
     input("Press enter to exit\n")
     raise SystemExit
 
-def repeat_line(reader:Reader.Reader):
+def repeat_line(reader):
     """Used to tell the reader to repeat a line with a 5 second delay
     
     Args:
@@ -122,27 +120,27 @@ def repeat_line(reader:Reader.Reader):
     Print("Repeating current line")
 
 
-def toggle_pause(obj: Reader.Reader | Typer.Typer):
+def toggle_pause(obj):
     """Used to toggle the pause of an object."""
     obj.paused = not obj.paused
     Print(str(obj), "has been", "paused" if obj.paused else "unpaused")
     return None
 
-def toggle_reader_pause(reader:Reader.Reader):
+def toggle_reader_pause(reader):
     """Used to toggle the pause state of a Reader object
     
     Args:
         reader (Reader.Reader): The reader to be acted upon"""
     toggle_pause(reader)
 
-def toggle_typer_pause(typer:Typer.Typer):
+def toggle_typer_pause(typer):
     """Used to toggle the pause state of a Typer object
     
     Args:
         typer (Typer.Typer): The typer to be acted upon"""
     toggle_pause(typer)
 
-def obj_shut_down(obj:Typer.Typer | Reader.Reader):
+def obj_shut_down(obj):
     """Used to set an objects running state to False.
     
     Args:
@@ -152,14 +150,14 @@ def obj_shut_down(obj:Typer.Typer | Reader.Reader):
     Print(str(obj), "has been stopped.")
 
 
-def typer_shut_down(typer:Typer.Typer):
+def typer_shut_down(typer):
     """Used to stop the current typer from typing.
     
     Args:
         typer (Typer.Typer): The typer to stop"""
     obj_shut_down(typer)
 
-def reader_shut_down(reader:Reader.Reader):
+def reader_shut_down(reader):
     """Used to stop the current reader from reading
     
     Args:
