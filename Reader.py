@@ -1,7 +1,7 @@
 import time
 import os
 from tkinter import filedialog, Tk
-from . import Engine
+import Engine
 
 
 # FILE_PATH = "./Script.txt"

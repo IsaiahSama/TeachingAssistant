@@ -1,6 +1,6 @@
 import helper
-from ScriptReading import Reader
-from TypeForMe import Typer
+import Reader
+import Typer
 from time import sleep
 
 class Main:

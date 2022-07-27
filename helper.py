@@ -3,7 +3,7 @@
 from typing import Callable
 from pyinputplus import inputMenu, inputYesNo
 from threading import Thread
-from ScriptReading import Engine
+import Engine
 
 engine = Engine.Engine()
 
