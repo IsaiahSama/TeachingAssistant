@@ -134,7 +134,9 @@ class Typer:
                         keyboard.write(character)
                         sleep(self.wait_time)
                         
-                    keyboard.press_and_release("enter")
+                    keyboard.press("enter")
+                    sleep(0.5)
+                    keyboard.release("enter")
                     sleep(2)
             except KeyboardInterrupt:
                 Print("Stopping!")
