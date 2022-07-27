@@ -82,6 +82,18 @@ class Typer:
                     return True
         return None
 
+    def is_num(self, val:str):
+        """Used to check whether a given value is a floating point number.
+        
+        Args:
+            val (str): The value to check"""
+        try:
+            val = float(val)
+        except ValueError:
+            Print(val, "is not a number.")
+            return False
+        return True
+
     def exe_command(self, msg:str) -> bool:
         """Used to execute a given command.
         
@@ -92,21 +104,14 @@ class Typer:
             Bool"""
         
         # Parsing time.
+        text = msg.split(" ")[1:]
         if self.cmd == "wait":
-            text = msg.split("wait")[1:]
             val = text[-1].strip()
-            try:
-                val = float(val)
-            except ValueError:
-                Print(val, "is not a number, so no waiting will be done.")
-                return False
-                
-            secs = float(val)
-            Print("Waiting", secs, "seconds")
-            sleep(secs)
+            if self.is_num(val):
+                Print("Waiting", val, "seconds")
+                sleep(float(val))
 
         if self.cmd == "typespeed":
-            text = msg.split(" ")[1:]
             new_speed = text[-1].strip()
             try:
                 new_speed = float(new_speed)
@@ -128,6 +133,20 @@ class Typer:
                 keyboard.press_and_release(key)
             except Exception as err:
                 Print(err)
+            
+        if self.cmd == "rate":
+            new_rate = text[-1].strip()
+            if self.is_num(new_rate):
+                self.engine.rate = new_rate
+                Print("The new engine rate is", self.engine.rate)
+        
+        if self.cmd == "voice":
+            new_voice = text[-1].strip()
+            if self.is_num(new_voice):
+                if new_voice in [0, 1]:
+                    self.engine.voice = int(new_voice)
+                else:
+                    Print("Values for new voices are 0 and 1")
 
     def type_it(self):
         """Method responsible for actually typing to the current window."""
