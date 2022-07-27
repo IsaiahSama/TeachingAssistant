@@ -34,6 +34,7 @@ class Reader:
         commands (list): List of commands
         cmd (str): The current command to be run.
         running (bool): Whether the script should be allowed to run or not.
+        paused (bool): Whether to pause the reading or not
 
     Methods:
         setup(): Used to set up everything the program needs
@@ -48,6 +49,7 @@ class Reader:
         self.cmd = None
         self.file_path = ""
         self.running = True
+        self.pause = False
 
     def run(self):
         """Used to run the program."""
@@ -55,6 +57,7 @@ class Reader:
 
         for line in self.script:
             if not self.running: raise SystemExit
+            while self.pause: time.sleep(0.2)
             try:
                 if self.is_command(line):
                     self.exe_command(line)
