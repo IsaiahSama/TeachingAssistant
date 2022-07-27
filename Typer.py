@@ -27,6 +27,8 @@ class Typer:
         commands (list): A list of commands that can be used to control the Typer
         wait_time (float): The time to wait inbetween typing each character.
         paused (bool): Whether the typer is paused or not
+        running (bool): Whether the typer is running or not
+
     Methods:
         get_file -> str: used to get the file containing the script to be typed
         load_script -> None: used to load the script to be typed from the file
@@ -41,6 +43,7 @@ class Typer:
         self.commands = ["wait", "typespeed", "input", "presskey"]
         self.wait_time = 0.2
         self.paused = False
+        self.running = True
 
     def get_file(self) -> str:
         """Method used to get the file containing the script the be typed
@@ -135,6 +138,7 @@ class Typer:
 
         for line in self.script_text:
             while self.paused: sleep(0.2)
+            if not self.running: return
             line = line.strip("\n")
             try:
                 if self.is_command(line):
@@ -142,6 +146,7 @@ class Typer:
                 else:
                     for character in line.strip():
                         while self.paused: sleep(0.2)
+                        if not self.running: return
                         keyboard.write(character)
                         sleep(self.wait_time)
                         

@@ -97,3 +97,27 @@ def toggle_typer_pause(typer:Typer.Typer):
     Args:
         typer (Typer.Typer): The typer to be acted upon"""
     toggle_pause(typer)
+
+def obj_shut_down(obj:Typer.Typer | Reader.Reader):
+    """Used to set an objects running state to False.
+    
+    Args:
+        obj (Typer.Typer | Reader.Reader): The object with a running attribute to be set to false"""
+    
+    obj.running = False
+    Print(str(obj), "has been stopped.")
+
+
+def typer_shut_down(typer:Typer.Typer):
+    """Used to stop the current typer from typing.
+    
+    Args:
+        typer (Typer.Typer): The typer to stop"""
+    obj_shut_down(typer)
+
+def reader_shut_down(reader:Reader.Reader):
+    """Used to stop the current reader from reading
+    
+    Args:
+        reader (Reader.Reader): The reader to stop"""
+    obj_shut_down(reader)

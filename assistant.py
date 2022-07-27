@@ -32,7 +32,7 @@ class Main:
     def setup_read_script(self):
         """Performs setup for a script to be read"""
 
-        if self.reader:
+        if self.reader and self.reader.running:
             print("A script is currently being read. Would you like to force stop it? Yes or No?\n:")
             if helper.prompt_for_yes_no() == "yes":
                 self.reader.running = False
@@ -42,11 +42,13 @@ class Main:
         self.reader = Reader.Reader()
         helper.create_thread(self.reader.run)
         keyboard.add_hotkey("ctrl+p", helper.toggle_reader_pause, [self.reader])
+        keyboard.add_hotkey("alt+p", helper.reader_shut_down, [self.reader])
 
     def type_code(self):
         self.typer = Typer.Typer()
         helper.create_thread(self.typer.type_it)
         keyboard.add_hotkey("ctrl+`", helper.toggle_typer_pause, [self.typer])
+        keyboard.add_hotkey("alt+`", helper.typer_shut_down,  [self.typer])
 
 if __name__ == "__main__":
     main = Main()
