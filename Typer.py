@@ -125,6 +125,7 @@ class Typer:
         sleep(5)
 
         for line in self.script_text:
+            line = line.strip("\n")
             try:
                 if self.is_command(line):
                     self.exe_command(line)
