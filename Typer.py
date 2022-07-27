@@ -130,13 +130,11 @@ class Typer:
                 if self.is_command(line):
                     self.exe_command(line)
                 else:
-                    for character in line:
+                    for character in line.strip():
                         keyboard.write(character)
                         sleep(self.wait_time)
                         
-                    keyboard.press("enter")
-                    sleep(0.5)
-                    keyboard.release("enter")
+                    keyboard.press_and_release("enter")
                     sleep(2)
             except KeyboardInterrupt:
                 Print("Stopping!")
