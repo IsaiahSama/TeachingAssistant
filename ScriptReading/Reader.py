@@ -69,7 +69,7 @@ class Reader:
         """Used to setup everything the program needs."""
         root = Tk()
 
-        self.file_path = filedialog.askopenfilename(initialdir="./Scripts", title="Select txt file for me to read.", filetypes=(("text", "*.txt"),))
+        self.file_path = filedialog.askopenfilename(initialdir="Files/", title="Select txt file for me to read.", filetypes=(("text", "*.txt"),))
         root.destroy()
 
         if not self.file_path:
