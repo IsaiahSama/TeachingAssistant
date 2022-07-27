@@ -1,8 +1,15 @@
 My name is Kevin!!
 
-I am 72 years old.
+voice 1
 
-That means I am cool!
+My name is Missus
+
+I speak at a normal rate
+
+voice 0
+rate 200
+
+But I speak very quickly
 
 wait 2
 
