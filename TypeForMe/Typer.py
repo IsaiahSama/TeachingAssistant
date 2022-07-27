@@ -47,7 +47,7 @@ class Typer:
             str - The filename"""
         root = Tk()
 
-        filename = filedialog.askopenfilename(initialdir="../Files/", title="Select Your File", filetypes=(("Text", "*.txt"),))
+        filename = filedialog.askopenfilename(initialdir="Files/", title="Select Your File", filetypes=(("Text", "*.txt"),))
         root.destroy()
 
         return filename
