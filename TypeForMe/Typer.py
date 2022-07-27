@@ -37,7 +37,7 @@ class Typer:
 
     def __init__(self) -> None:
         self.script_text = None
-        self.commands = ["wait", "typespeed"]
+        self.commands = ["wait", "typespeed", "input"]
         self.wait_time = 0.2
 
     def get_file(self) -> str:
@@ -112,6 +112,9 @@ class Typer:
             new_speed = float(new_speed)
             Print("Set typing speed to have a delay of", new_speed)
             self.wait_time = new_speed
+
+        if self.cmd == "input":
+            input("Press enter to continue")
 
     def type_it(self):
         """Method responsible for actually typing to the current window."""
