@@ -37,7 +37,7 @@ class Typer:
 
     def __init__(self) -> None:
         self.script_text = None
-        self.commands = ["wait", "typespeed", "input"]
+        self.commands = ["wait", "typespeed", "input", "presskey"]
         self.wait_time = 0.2
 
     def get_file(self) -> str:
@@ -116,6 +116,13 @@ class Typer:
         if self.cmd == "input":
             input("Press enter to continue")
             sleep(5)
+
+        if self.cmd == "presskey":
+            key = msg.split(" ")[1:].strip()
+            try:
+                keyboard.press_and_release(key)
+            except Exception as err:
+                Print(err)
 
     def type_it(self):
         """Method responsible for actually typing to the current window."""
