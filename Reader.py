@@ -49,6 +49,7 @@ class Reader(Aider.Aid):
 
     def run(self):
         """Used to run the program."""
+        self.script = [line for line in self.script if line.strip() != '']
         line_count = len(self.script)
         current_line = 0
 
