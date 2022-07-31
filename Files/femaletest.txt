@@ -1,0 +1,9 @@
+I am a male voice... And this is my female friend
+
+voice 1
+
+This is to test the female voice.
+Hello there, I am a woman
+
+wait 2
+Or the voice of one at least.

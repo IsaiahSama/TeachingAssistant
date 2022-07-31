@@ -7,6 +7,9 @@ name = "pypi"
 pyttsx3 = "*"
 pyinputplus = "*"
 keyboard = "*"
+gtts = "*"
+pygame = "*"
+pyglet = "*"
 
 [dev-packages]
 
