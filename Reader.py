@@ -1,9 +1,11 @@
+from random import choice
 import time
 
 import Engine
 import Aider
 
 from tkinter import filedialog, Tk
+from os import path
 
 # FILE_PATH = "./Script.txt"
 
@@ -46,6 +48,7 @@ class Reader(Aider.Aid):
     def __init__(self):
         super().__init__("Reader")
         self.repeat_line = False
+        self.commands += ["select"]
 
     def run(self):
         """Used to run the program."""
@@ -91,6 +94,20 @@ class Reader(Aider.Aid):
         return None
     
     # No custom commands so no need to overwrite.
+    def exe_command(self, command: str) -> bool:
+        if not super().exe_command(command):
+            text = command.split(" ")[1:]
+
+            if self.current_cmd == "select":
+                filename = text[-1].strip()
+                if not path.exists(filename):
+                    self.Print("No filename called", filename, "exists")
+                    return False
+                with open(filename) as fp:
+                    options = fp.readlines()
+                chosen = choice([option for option in options if option.strip() != ""])
+                self.engine.say_and_print(chosen)
+
 
 
 if __name__ == "__main__":

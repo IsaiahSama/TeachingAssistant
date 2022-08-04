@@ -85,19 +85,21 @@ class Aid:
                 sleep(float(val))
             return True
 
-        if self.current_cmd == "input":
+        elif self.current_cmd == "input":
             input("Press enter to continue")
             sleep(5)
+            return True
 
-        if self.current_cmd == "rate":
+        elif self.current_cmd == "rate":
             new_rate = text[-1].strip()
             if helper.is_num(new_rate):
                 self.engine.rate = int(new_rate)
                 self.Print("The new engine rate is", self.engine.rate)
             else:
                 self.Print(new_rate, "is not a number")
+            return True
         
-        if self.current_cmd == "voice":
+        elif self.current_cmd == "voice":
             new_voice = text[-1].strip()
             if helper.is_num(new_voice):
                 if int(new_voice) in [0, 1]:
@@ -105,3 +107,5 @@ class Aid:
                     self.Print("The new voice is", self.engine.voice)
                 else:
                     self.Print("Values for new voices are 0 and 1, not", new_voice)
+            return True
+        else: return False

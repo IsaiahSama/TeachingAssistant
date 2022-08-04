@@ -1,0 +1,4 @@
+here I will choose...
+
+wait 2
+select options.txt
