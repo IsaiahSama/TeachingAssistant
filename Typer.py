@@ -51,7 +51,7 @@ class Typer(Aider.Aid):
 
             if self.current_cmd == "typespeed":
                 value = text[-1].strip()
-                if helper.helper.is_num(value):
+                if helper.is_num(value):
                     self.Print("Set typing speed to have a delay of", value)
                     self.wait_time = float(value)
 
