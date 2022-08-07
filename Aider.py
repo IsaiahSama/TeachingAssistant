@@ -86,8 +86,8 @@ class Aid:
             return True
 
         elif self.current_cmd == "input":
-            input("Press enter to continue")
-            sleep(5)
+            text = input("Enter text for me to read:")
+            self.engine.say_and_print(text)
             return True
 
         elif self.current_cmd == "rate":
