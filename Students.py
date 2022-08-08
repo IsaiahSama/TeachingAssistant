@@ -48,7 +48,11 @@ class Students:
         else:
             with open(filename) as fp:
                 self.students = yaml.safe_load(fp)
-                Print("Loaded students")
+                if not self.students:
+                    Print("YAML file is empty")
+                    self.students = {}
+                else:
+                    Print("Loaded students")
 
     def menu(self):
         """The menu interface the user will use while using the student class"""
