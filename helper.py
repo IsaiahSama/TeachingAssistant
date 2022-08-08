@@ -87,8 +87,9 @@ def prompt_for_choice(prompt, options:list):
     Returns:
         str - The item tat was chosen"""
 
-    print("Select your option from below.")
-    return inputChoice(options, prompt)
+    print(prompt, "\n")
+    print('\n'.join(options), "\n")
+    return inputChoice(options, "")
 
 def prompt_for_yes_no():
     """Prompts the user for a yes or no response."""
