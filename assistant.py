@@ -1,6 +1,7 @@
 import helper
 import Reader
 import Typer
+import Students
 import keyboard
 from time import sleep
 
@@ -10,6 +11,12 @@ class Main:
     Attrs:
         reader (Reader): An instance of the Reader class being used for reading.
         typer (Typer): An instance of the Typer class being used for typing
+
+    Methods:
+        run(): The mainn control loop for the assistant.
+        menu(): Displays the main menu for the user
+        setup_read_script(): Performs the setup for a script to be read. (Threaded)
+        type_code(): Performs the setup for code to be typed (Threaded)
 
     """
     def __init__(self) -> None:
@@ -46,10 +53,16 @@ class Main:
         keyboard.add_hotkey("ctrl+shift", helper.repeat_line, [self.reader])
 
     def type_code(self):
+        """Performs the setup for the code to be run"""
         self.typer = Typer.Typer()
         helper.create_thread(self.typer.run)
         keyboard.add_hotkey("ctrl+`", helper.toggle_typer_pause, [self.typer])
         keyboard.add_hotkey("alt+`", helper.typer_shut_down,  [self.typer])
+
+    def manage_students(self):
+        """Uses the Student manage to manage the students."""
+        students = Students.Students()
+        students.menu()
 
 if __name__ == "__main__":
     main = Main()
@@ -57,6 +70,7 @@ if __name__ == "__main__":
     menu_options = {
         "Read Script": main.setup_read_script,
         "Type code": main.type_code,
+        "Manage Students": main.manage_students,
         "Quit": helper.ask_and_quit
     }
 
