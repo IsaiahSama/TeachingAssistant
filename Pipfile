@@ -10,6 +10,9 @@ keyboard = "*"
 gtts = "*"
 pygame = "*"
 pyglet = "*"
+speechrecognition = "*"
+pyaudio = "*"
+pyyaml = "*"
 
 [dev-packages]
 

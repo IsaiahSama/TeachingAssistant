@@ -145,3 +145,7 @@ class Students:
 
     def return_to_caller(self):
         self.running = False
+
+if __name__ == "__main__":
+    student = Students()
+    student.menu()
