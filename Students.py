@@ -65,6 +65,8 @@ class Students:
             "Return to Assistant": self.return_to_caller}
 
         while self.running:
+            print(self.students)
+            print()
             Print("Select the task you want to do from below.")
             options[helper.prompt_for_menu("\n", options)]()
     
@@ -103,7 +105,7 @@ class Students:
         """Provides a menu for checking various point related information"""
 
         menu = {"CHECK POINTS FOR...": self.points_for, "HIGHEST AND LOWEST POINTS": self.min_max_points}
-        prompt = "What would you like to do with points? Select from the below menu."
+        prompt = "What would you like to do with points? Select from the below menu.\n"
         
         choice = helper.prompt_for_menu(prompt, menu)
         menu[choice]()
@@ -126,8 +128,8 @@ class Students:
         if highest_point != lowest_point:
             low_achievers = [name for name in self.students.keys() if self.students[name]["POINTS"] == lowest_point]
 
-        print("HIGH ACHIEVERS with", highest_point, "points are:", '\n'.join(high_achievers))
-        print("LOW ACHIEVERS with", lowest_point, "points are:", '\n'.join(low_achievers if low_achievers else ["NO", "ONE"]))
+        print("HIGH ACHIEVERS with", highest_point, "points are:\n", '\n'.join(high_achievers))
+        print("LOW ACHIEVERS with", lowest_point, "points are:\n", '\n'.join(low_achievers if low_achievers else ["NO", "ONE"]))
             
 
     def reward_points(self):
