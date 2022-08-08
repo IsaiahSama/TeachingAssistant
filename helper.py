@@ -1,7 +1,7 @@
 """File which will contain helper functions"""
 
 from typing import Callable
-from pyinputplus import inputMenu, inputYesNo
+from pyinputplus import inputMenu, inputYesNo, inputChoice
 from threading import Thread
 from tkinter import Tk, filedialog
 
@@ -27,7 +27,7 @@ def is_num(val:str):
     return True
 
 def get_file() -> str:
-        """Method used to get the file containing the script the be typed
+        """Method used to get a given file using a gui
         
         Returns:
             str - The filename"""
@@ -64,18 +64,31 @@ def say_message(message:str):
 
     engine.speak(message)
 
-def prompt_for_choice(prompt, options:dict):
-    """Allows the user to select an option from a given choice set.
+def prompt_for_menu(prompt, options:dict):
+    """Allows the user to select an option from a given menu.
     
     Args:
         prompt (str): The prompt to be displayed to the screen
-        options (dict): A dictionary matching each choice to their value
+        options (dict): A dictionary matching each choice to their callback function value.
         
     Returns:
         str - The chosen key"""
 
     Print("Select the number of the choice you want to do.")
     return inputMenu(list(options.keys()), prompt, numbered=True)
+
+def prompt_for_choice(prompt, options:list):
+    """Allows the user to select an option from a given list:
+    
+    Args:
+        prompt (str): The prompt to be displayed to the screen.
+        options (list): The list of valid options
+        
+    Returns:
+        str - The item tat was chosen"""
+
+    print("Select your option from below.")
+    return inputChoice(options, prompt)
 
 def prompt_for_yes_no():
     """Prompts the user for a yes or no response."""
