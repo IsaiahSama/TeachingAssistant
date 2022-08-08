@@ -27,7 +27,7 @@ class Main:
         """Displays the menu for the user to select their choice"""
 
         prompt = "\nHere is what I have to offer. Select from the options below.\n"
-        menu_options[helper.prompt_for_choice(prompt, menu_options)]()
+        menu_options[helper.prompt_for_menu(prompt, menu_options)]()
 
     def setup_read_script(self):
         """Performs setup for a script to be read"""
