@@ -89,7 +89,8 @@ class Students:
             return False
 
         for name in student_names:
-            self.students.setdefault(name, {"NAME": name, "POINTS": 100})
+            if not name: continue
+            self.students.setdefault(name.strip(), {"NAME": name.strip(), "POINTS": 100})
         self.save()
 
     def prompt_for_name(self) -> str:
