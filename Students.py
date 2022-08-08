@@ -84,6 +84,7 @@ class Students:
 
         for name in student_names:
             self.students.setdefault(name, {"NAME": name, "POINTS": 100})
+        self.save()
 
     def prompt_for_name(self) -> str:
         """Requests the user to enter a valid student's name
