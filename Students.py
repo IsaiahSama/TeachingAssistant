@@ -31,6 +31,7 @@ class Students:
         check_points(): Used to check points.
         points_for(): Displays the points a given student has
         min_max_points(): Displays the people with the highest and lowest point values
+        sort_students(): Sorts the students and displays them in descending order by number of points
         reward_points(): Used to give points to a student.
         save(): Used to save the local dictionary to the yaml file
         menu(): Provides the menu interface for the user to interact with the student class
@@ -65,6 +66,7 @@ class Students:
             "Return to Assistant": self.return_to_caller}
 
         while self.running:
+            print()
             Print("Select the task you want to do from below.")
             options[helper.prompt_for_menu("\n", options)]()
     
@@ -103,7 +105,11 @@ class Students:
     def check_points(self) -> None:
         """Provides a menu for checking various point related information"""
 
-        menu = {"CHECK POINTS FOR...": self.points_for, "HIGHEST AND LOWEST POINTS": self.min_max_points}
+        menu = {
+            "CHECK POINTS FOR...": self.points_for,
+            "HIGHEST AND LOWEST POINTS": self.min_max_points,
+            "STUDENT POSITIONS": self.sort_students
+            }
         prompt = "What would you like to do with points? Select from the below menu.\n"
         
         choice = helper.prompt_for_menu(prompt, menu)
@@ -130,6 +136,11 @@ class Students:
         print("HIGH ACHIEVERS with", highest_point, "points are:\n", '\n'.join(high_achievers), "\n")
         print("LOW ACHIEVERS with", lowest_point, "points are:\n", '\n'.join(low_achievers if low_achievers else ["NO", "ONE"]), "\n")
             
+    def sort_students(self):
+        """Sorts the students and displays them in descending order by number of points"""
+        print()
+        for i, info in enumerate(sorted(self.students.items(), key=lambda x: x[1]["POINTS"], reverse=True), start=1):
+            print(i, "-", info[0], info[1]["POINTS"])
 
     def reward_points(self):
         """Used to grant points to a student. Use negative numbers to deduct points"""        
