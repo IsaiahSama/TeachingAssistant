@@ -1,7 +1,7 @@
 """File which will contain helper functions"""
 
 from typing import Callable
-from pyinputplus import inputMenu, inputYesNo, inputChoice
+from pyinputplus import inputMenu, inputYesNo, inputChoice, inputInt
 from threading import Thread
 from tkinter import Tk, filedialog
 
@@ -94,6 +94,19 @@ def prompt_for_yes_no():
     """Prompts the user for a yes or no response."""
 
     return inputYesNo()
+
+def prompt_for_int(prompt:str, min=-10, max=10) -> int:
+    """Prompts the user to enter a number
+    
+    Args:
+        prompt(str): Message to be the prompt for the user
+        min (int): The minimum number that can be entered. Defaults to -10
+        max (int): The maximum number that can be entered. Defaults to 10
+        
+    Returns:
+        int"""
+
+    return inputInt(prompt, 5, min=min, max=max)
 
 def enter_to_continue(prompt="Press Enter to continue\n"):
     """Function that prompts the user to press enter to continue.
