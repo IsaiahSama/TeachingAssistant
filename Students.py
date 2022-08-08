@@ -65,8 +65,6 @@ class Students:
             "Return to Assistant": self.return_to_caller}
 
         while self.running:
-            print(self.students)
-            print()
             Print("Select the task you want to do from below.")
             options[helper.prompt_for_menu("\n", options)]()
     
@@ -129,15 +127,15 @@ class Students:
         if highest_point != lowest_point:
             low_achievers = [name for name in self.students.keys() if self.students[name]["POINTS"] == lowest_point]
 
-        print("HIGH ACHIEVERS with", highest_point, "points are:\n", '\n'.join(high_achievers))
-        print("LOW ACHIEVERS with", lowest_point, "points are:\n", '\n'.join(low_achievers if low_achievers else ["NO", "ONE"]))
+        print("HIGH ACHIEVERS with", highest_point, "points are:\n", '\n'.join(high_achievers), "\n")
+        print("LOW ACHIEVERS with", lowest_point, "points are:\n", '\n'.join(low_achievers if low_achievers else ["NO", "ONE"]), "\n")
             
 
     def reward_points(self):
         """Used to grant points to a student. Use negative numbers to deduct points"""        
         student_name = self.prompt_for_name()
 
-        prompt = "How many points are you giving to " + student_name + "?"
+        prompt = "How many points are you giving to " + student_name + "?\n:"
         amount = helper.prompt_for_int(prompt)
 
         self.students[student_name]["POINTS"] += amount
